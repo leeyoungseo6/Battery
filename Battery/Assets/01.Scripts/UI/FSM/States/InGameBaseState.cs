@@ -1,4 +1,4 @@
-using UnityEngine;
+using EventSystem;
 using UnityEngine.UIElements;
 
 public class InGameBaseState : InGameState
@@ -22,17 +22,27 @@ public class InGameBaseState : InGameState
     private void OnGridBatteryClicked(MouseDownEvent evt)
     {
         if (evt.clickCount == 2)
+        {
+            evt.StopPropagation();
+            Battery battery = evt.target as Battery;
+            UIEvents.SelectBatteryEvent.target = battery;
+            _mainUI.eventChannel.RaiseEvent(UIEvents.SelectBatteryEvent);
+            battery.CreateEdge(evt);
             _stateMachine.ChangeState(InGameStateEnum.BatterySelect);
+        }
         else
         {
-            Debug.Log((evt.target as Battery).name);
+            (evt.target as Battery).StartDrag(evt);
             _stateMachine.ChangeState(InGameStateEnum.BatteryMove);
         }
     }
 
     private void OnPanelBatteryClicked(MouseDownEvent evt)
     {
-        (evt.target as Battery).StartDrag(evt);
-        _stateMachine.ChangeState(InGameStateEnum.BatteryMove);
+        if (evt.target is Battery battery)
+        {
+            battery.StartDrag(evt);
+            _stateMachine.ChangeState(InGameStateEnum.BatteryMove);
+        }
     }
 }

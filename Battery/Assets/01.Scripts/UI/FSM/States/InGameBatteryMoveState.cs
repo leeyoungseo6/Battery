@@ -24,11 +24,15 @@ public class InGameBatteryMoveState : InGameState
 
     private void OnBatteryMoved(MouseMoveEvent evt)
     {
-        (evt.target as Battery).Move(evt.localMousePosition);
+        if (evt.target is Battery { IsDragging: true } battery)
+            battery.Move(evt.localMousePosition);
     }
 
     private void OnBatteryReleased(MouseUpEvent evt)
     {
-        (evt.target as Battery).EndDrag();
+        if (evt.target is Battery { IsDragging: true } battery)
+            battery.EndDrag(evt.mousePosition);
+        
+        _stateMachine.ChangeState(InGameStateEnum.Base);
     }
 }

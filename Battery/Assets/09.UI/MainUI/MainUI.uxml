@@ -2,8 +2,7 @@
     <Style src="project://database/Assets/09.UI/MainUI/MainUI.uss?fileID=7433441132597879392&amp;guid=17ba24dbc52298747bfe8997f2d40ebb&amp;type=3#MainUI" />
     <engine:VisualElement name="Root" style="flex-grow: 1;">
         <engine:VisualElement name="CorePanel" style="width: 950px; height: 950px; position: absolute; align-items: center; justify-content: center; align-content: center; background-color: rgb(156, 156, 156); left: 65px; right: 65px; top: 485px; bottom: 485px;">
-            <Grid name="Grid" picking-mode="Ignore" />
+            <engine:VisualElement name="EdgeContainer" style="flex-grow: 1; flex-shrink: 0; position: absolute; top: 0; left: 0; bottom: 0; right: 0;" />
         </engine:VisualElement>
-        <BatteryPanel name="BatteryPanel" />
     </engine:VisualElement>
 </engine:UXML>

@@ -1,14 +1,12 @@
-using UnityEngine;
-
 namespace EventSystem
 {
     public static class UIEvents
     {
-        
+        public static SelectBatteryEvent SelectBatteryEvent = new();
     }
 
-    //public class MouseDownEvent : GameEvent
-    //{
-    //    
-    //}
+    public class SelectBatteryEvent : GameEvent
+    {
+        public Battery target;
+    }
 }

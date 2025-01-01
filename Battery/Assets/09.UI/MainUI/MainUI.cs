@@ -1,4 +1,5 @@
 using System;
+using EventSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,16 +13,20 @@ public enum InGameStateEnum
 public class MainUI : MonoBehaviour
 {
     private UIDocument _uiDocument;
+    
+    public VisualElement Root;
     public Grid grid;
     public BatteryPanel batteryPanel;
+    public VisualElement edgeContainer;
 
     private InGameStateMachine stateMachine;
+
+    public GameEventChannelSO eventChannel;
 
     private void Awake()
     {
         _uiDocument = GetComponent<UIDocument>();
         stateMachine = new InGameStateMachine();
-        Debug.Log(Type.GetType("InGameBaseState"));
         
         foreach (InGameStateEnum stateEnum in Enum.GetValues(typeof(InGameStateEnum)))
         {
@@ -48,11 +53,16 @@ public class MainUI : MonoBehaviour
 
     private void OnEnable()
     {
-        var root = _uiDocument.rootVisualElement;
+        Root = _uiDocument.rootVisualElement;
 
-        grid = root.Q<Grid>("Grid");
-        batteryPanel = root.Q<BatteryPanel>("BatteryPanel");
-        batteryPanel.Initialize(this);
+        var corePanel = Root.Q("CorePanel");
+        grid = new Grid(this);
+        corePanel.Add(grid);
+        
+        batteryPanel = new BatteryPanel(this);
         batteryPanel.CreateBattery(new[]{1, 2, 3});
+        Root.Add(batteryPanel);
+        
+        edgeContainer = Root.Q("EdgeContainer");
     }
 }

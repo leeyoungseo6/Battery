@@ -13,10 +13,12 @@ public partial class BatteryPanel : VisualElement
         AddToClassList("battery-panel");
         batteries = new();
     }
-
-    public void Initialize(MainUI mainUI)
+    
+    public BatteryPanel(MainUI mainUI)
     {
         _mainUI = mainUI;
+        AddToClassList("battery-panel");
+        batteries = new();
     }
 
     public void CreateBattery(int[] batteryPowers)
@@ -25,9 +27,28 @@ public partial class BatteryPanel : VisualElement
         {
             Battery battery = new Battery(batteryPowers[i]);
             battery.Initialize(_mainUI);
+            battery.name = $"Battery{i + 1}";
             Add(battery);
             
             batteries.Add(battery);
+        }
+    }
+
+    public void AddBattery(Battery battery)
+    {
+        Add(battery);
+        batteries.Add(battery);
+    }
+
+    public void RemoveBattery(Battery battery)
+    {
+        foreach (var item in batteries)
+        {
+            if (item == battery)
+            {
+                batteries.Remove(battery);
+                break;
+            }
         }
     }
 }

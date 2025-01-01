@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7650a44e99a4a32903168d2f5fc1ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventChannel: {fileID: 11400000, guid: 2ce21cd43bca58c46a0a3275b80435eb, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

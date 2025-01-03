@@ -24,7 +24,7 @@ public partial class Edge : VisualElement
         Add(edge);
     }
     
-    public Edge(MainUI mainUI, Battery battery)
+    public Edge(MainUI mainUI, Node node)
     {
         _mainUI = mainUI;
         _mainUI.edgeContainer.Add(this);
@@ -33,9 +33,10 @@ public partial class Edge : VisualElement
         _edge.AddToClassList("edge");
         Add(_edge);
 
-        Vector2 pos = battery.parent.layout.position;
+        Vector2 pos = node.layout.position;
         style.left = pos.x;
         style.top = pos.y;
+        visible = false;
     }
 
     public void AddToEdgeClassList(string className)

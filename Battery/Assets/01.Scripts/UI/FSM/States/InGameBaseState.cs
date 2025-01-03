@@ -27,7 +27,7 @@ public class InGameBaseState : InGameState
             Battery battery = evt.target as Battery;
             UIEvents.SelectBatteryEvent.target = battery;
             _mainUI.eventChannel.RaiseEvent(UIEvents.SelectBatteryEvent);
-            battery.CreateEdge(evt);
+            battery.CreateEdge();
             _stateMachine.ChangeState(InGameStateEnum.BatterySelect);
         }
         else

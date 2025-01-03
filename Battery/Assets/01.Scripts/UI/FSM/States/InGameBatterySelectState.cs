@@ -31,11 +31,9 @@ public class InGameBatterySelectState : InGameState
     private void OnMouseMoveEvent(MouseMoveEvent evt)
     {
         Node node = _mainUI.grid.GetNode(evt.mousePosition);
-        if (node.HasBattery(out var target))
+        if (node.HasBattery())
         {
-            if (_currentBattery == target) return;
-
-            _currentBattery.Connect(target);
+            _currentBattery.Connect(node);
         }
     }
 
